@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이은재 · AI 테스트베드 스튜디오</title>
+  <meta name="description" content="AI로 어디까지 만들 수 있는지 실험하는 1인 테스트베드 스튜디오. 실제로 배포한 서비스 모음." />
+  <meta property="og:title" content="이은재 · AI 테스트베드 스튜디오" />
+  <meta property="og:description" content="AI로 어디까지 만들 수 있는지 실험하는 1인 테스트베드 스튜디오. 실제로 배포한 서비스 모음." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'Apple SD Gothic Neo', 'sans-serif'] },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { -webkit-font-smoothing: antialiased; }
+    .grain::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .035;
+      background-image: radial-gradient(circle at 25% 25%, #fff 1px, transparent 1px);
+      background-size: 4px 4px;
+    }
+    .card-glow:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 24px 60px -20px rgba(0,0,0,.7); }
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 font-sans grain">
+  <div class="relative z-10 max-w-5xl mx-auto px-6">
+
+    <!-- Hero -->
+    <header class="pt-24 pb-16 sm:pt-32 sm:pb-20">
+      <p class="text-sm font-medium tracking-widest text-neutral-500 uppercase mb-5">AI test-bed studio · since 2026</p>
+      <h1 class="text-4xl sm:text-6xl font-extrabold leading-[1.1] tracking-tight">
+        AI로 어디까지<br />
+        <span class="bg-gradient-to-r from-rose-400 via-amber-300 to-emerald-400 bg-clip-text text-transparent">만들 수 있을까</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-neutral-400 leading-relaxed">
+        이은재의 AI 테스트베드 스튜디오. AI를 도구로, 기획부터 개발·배포·운영까지
+        실제 서비스를 끝까지 밀어붙여 보며 "AI로 어디까지 가능한지"를 실험합니다.
+        아래는 그 실험들이 실제로 라이브로 돌고 있는 결과물입니다.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3 text-sm">
+        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">기획</span>
+        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">개발</span>
+        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">배포</span>
+        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">운영</span>
+        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">전 과정 AI 활용</span>
+      </div>
+    </header>
+
+    <!-- Section label -->
+    <div class="flex items-center gap-4 mb-8">
+      <h2 class="text-sm font-semibold tracking-widest text-neutral-500 uppercase">Live Experiments</h2>
+      <div class="flex-1 h-px bg-neutral-800"></div>
+      <span class="text-sm text-neutral-600">3</span>
+    </div>
+
+    <!-- Cards -->
+    <main class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 pb-24">
+
+      <!-- 낳을텐데 -->
+      <a href="https://love-ivf.com" target="_blank" rel="noopener"
+         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-start justify-between">
+          <div class="text-3xl">🧬</div>
+          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            </span>
+            LIVE
+          </span>
+        </div>
+        <h3 class="mt-4 text-xl font-bold">낳을텐데</h3>
+        <p class="text-sm text-neutral-500 mt-0.5">IVF 기록·관리 앱</p>
+        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
+          시험관(IVF)을 하는 모든 사람을 위한 기록·관리 앱. 멀티유저·구글 로그인·AI 채팅으로
+          복약, 일정, 회차를 한 곳에서 관리합니다.
+        </p>
+        <div class="mt-5 flex items-center justify-between text-sm">
+          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">love-ivf.com</span>
+          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
+        </div>
+      </a>
+
+      <!-- 새좋 -->
+      <a href="https://like-birds.com" target="_blank" rel="noopener"
+         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-start justify-between">
+          <div class="text-3xl">🐦</div>
+          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            </span>
+            LIVE
+          </span>
+        </div>
+        <h3 class="mt-4 text-xl font-bold">새좋</h3>
+        <p class="text-sm text-neutral-500 mt-0.5">심플 탐조 앱</p>
+        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
+          사진 한 장으로 새를 식별하고, 한국 대표종 도감과 '내 도록(탐조 일지)'을 한 앱에서.
+          Merlin·eBird보다 더 심플하게.
+        </p>
+        <div class="mt-5 flex items-center justify-between text-sm">
+          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">like-birds.com</span>
+          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
+        </div>
+      </a>
+
+      <!-- 이은재서점 -->
+      <a href="https://eunjae-bookstore.vercel.app" target="_blank" rel="noopener"
+         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
+        <div class="flex items-start justify-between">
+          <div class="text-3xl">📚</div>
+          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            </span>
+            LIVE
+          </span>
+        </div>
+        <h3 class="mt-4 text-xl font-bold">이은재서점</h3>
+        <p class="text-sm text-neutral-500 mt-0.5">신간 큐레이션</p>
+        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
+          좋아하는 출판사·작가·독립서점의 신간을 매일 자동 수집해, 알라딘 이벤트 페이지 스타일
+          그리드 한 장으로 보는 개인 큐레이션 서비스.
+        </p>
+        <div class="mt-5 flex items-center justify-between text-sm">
+          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">eunjae-bookstore.vercel.app</span>
+          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
+        </div>
+      </a>
+
+    </main>
+
+    <!-- Contact -->
+    <section class="border-t border-neutral-900 pt-12 pb-4">
+      <div class="flex items-center gap-4 mb-6">
+        <h2 class="text-sm font-semibold tracking-widest text-neutral-500 uppercase">Contact</h2>
+        <div class="flex-1 h-px bg-neutral-800"></div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a href="mailto:leeeunjae.house@gmail.com"
+           class="card-glow group inline-flex items-center gap-3 rounded-xl border border-neutral-800 bg-neutral-900/60 px-5 py-3 transition-all hover:-translate-y-0.5">
+          <span class="text-lg">✉️</span>
+          <span class="text-sm text-neutral-300 group-hover:text-white transition-colors">leeeunjae.house@gmail.com</span>
+        </a>
+        <a href="tel:+821096665354"
+           class="card-glow group inline-flex items-center gap-3 rounded-xl border border-neutral-800 bg-neutral-900/60 px-5 py-3 transition-all hover:-translate-y-0.5">
+          <span class="text-lg">📞</span>
+          <span class="text-sm text-neutral-300 group-hover:text-white transition-colors">010-9666-5354</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-900 mt-12 py-10 text-sm text-neutral-600">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <p>© 2026 이은재 · AI 테스트베드 스튜디오</p>
+        <p>새로운 실험이 배포되면 이 페이지에 추가됩니다.</p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
