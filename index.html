@@ -11,265 +11,255 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'system-ui', 'Apple SD Gothic Neo', 'sans-serif'] },
-        },
-      },
-    };
-  </script>
   <style>
-    html { scroll-behavior: smooth; }
-    body { -webkit-font-smoothing: antialiased; }
-    .grain::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .035;
-      background-image: radial-gradient(circle at 25% 25%, #fff 1px, transparent 1px);
-      background-size: 4px 4px;
+    :root {
+      --bg: #000000;
+      --surface: #1d1d1f;
+      --surface-2: #161617;
+      --text: #f5f5f7;
+      --muted: #86868b;
+      --line: #2a2a2c;
+      --blue: #2997ff;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+              "Helvetica Neue", "Inter", "Apple SD Gothic Neo", sans-serif;
     }
-    .card-glow:hover { box-shadow: 0 0 0 1px rgba(255,255,255,.12), 0 24px 60px -20px rgba(0,0,0,.7); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: var(--font); -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility; letter-spacing: -0.01em;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1024px; margin: 0 auto; padding: 0 22px; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(0,0,0,0.7); backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 48px; }
+    .nav .brand { font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+    .nav .links { display: flex; gap: 26px; font-size: 13px; color: var(--muted); }
+    .nav .links a { transition: color .2s; }
+    .nav .links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 120px 0 96px; }
+    .eyebrow {
+      font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); font-weight: 600; margin: 0 0 22px;
+    }
+    .hero h1 {
+      font-size: clamp(2.7rem, 7.2vw, 5.6rem); font-weight: 600;
+      line-height: 1.05; letter-spacing: -0.025em; margin: 0;
+    }
+    .metal {
+      background: linear-gradient(180deg, #fbfbfd 8%, #c9c9ce 52%, #8e8e93 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p.sub {
+      max-width: 620px; margin: 26px auto 0; color: var(--muted);
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem); line-height: 1.5; font-weight: 400;
+    }
+    .cta { display: flex; gap: 14px; justify-content: center; margin-top: 38px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px; height: 46px; padding: 0 24px;
+      border-radius: 980px; font-size: 15px; font-weight: 500; transition: all .25s;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #0a84ff; transform: translateY(-1px); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--text); }
+    .btn-ghost:hover { border-color: #4a4a4d; background: rgba(255,255,255,0.04); }
+
+    /* Section heading */
+    .sec { padding: 64px 0; }
+    .sec-head { text-align: center; margin-bottom: 56px; }
+    .sec-head h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 600;
+      letter-spacing: -0.025em; line-height: 1.08; margin: 0;
+    }
+    .sec-head p { color: var(--muted); font-size: 1.05rem; margin: 16px 0 0; }
+
+    /* Cards */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      display: flex; flex-direction: column; background: var(--surface);
+      border-radius: 28px; padding: 30px 28px; min-height: 280px;
+      transition: transform .35s cubic-bezier(.2,.7,.2,1), background .35s;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .card:hover { transform: translateY(-6px); background: #232325; }
+    .card .top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .card .emoji { font-size: 34px; line-height: 1; }
+    .live {
+      display: inline-flex; align-items: center; gap: 7px; font-size: 11px;
+      font-weight: 600; letter-spacing: 0.08em; color: #30d158; text-transform: uppercase;
+    }
+    .dot { position: relative; width: 7px; height: 7px; }
+    .dot::before, .dot::after {
+      content: ""; position: absolute; inset: 0; border-radius: 50%; background: #30d158;
+    }
+    .dot::before { animation: ping 1.6s cubic-bezier(0,0,.2,1) infinite; }
+    @keyframes ping { 75%,100% { transform: scale(2.4); opacity: 0; } }
+    .card h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin: 22px 0 2px; }
+    .card .cat { font-size: 13px; color: var(--muted); margin: 0; }
+    .card .desc { font-size: 14.5px; line-height: 1.55; color: var(--muted); margin: 14px 0 0; flex: 1; }
+    .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; }
+    .card .domain { font-size: 13.5px; color: var(--blue); font-weight: 500; }
+    .card .arrow { color: var(--blue); transition: transform .25s; }
+    .card:hover .arrow { transform: translateX(3px); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Contact */
+    .contact { text-align: center; padding: 80px 0; border-top: 1px solid var(--line); }
+    .contact h2 { font-size: clamp(1.8rem, 4.4vw, 2.8rem); font-weight: 600; letter-spacing: -0.025em; margin: 0; }
+    .contact .pills { display: flex; gap: 14px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 24px;
+      border-radius: 980px; background: var(--surface); border: 1px solid rgba(255,255,255,0.05);
+      font-size: 15px; transition: all .25s;
+    }
+    .pill:hover { background: #232325; transform: translateY(-2px); }
+
+    footer { text-align: center; padding: 36px 0 56px; color: #6e6e73; font-size: 12.5px; border-top: 1px solid var(--line); }
   </style>
 </head>
-<body class="bg-neutral-950 text-neutral-100 font-sans grain">
-  <div class="relative z-10 max-w-5xl mx-auto px-6">
+<body>
 
-    <!-- Hero -->
-    <header class="pt-24 pb-16 sm:pt-32 sm:pb-20">
-      <p class="text-sm font-medium tracking-widest text-neutral-500 uppercase mb-5">AI test-bed studio · since 2026</p>
-      <h1 class="text-4xl sm:text-6xl font-extrabold leading-[1.1] tracking-tight">
-        AI로 어디까지<br />
-        <span class="bg-gradient-to-r from-rose-400 via-amber-300 to-emerald-400 bg-clip-text text-transparent">만들 수 있을까</span>
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg text-neutral-400 leading-relaxed">
-        이은재의 AI 테스트베드 스튜디오. AI를 도구로, 기획부터 개발·배포·운영까지
-        실제 서비스를 끝까지 밀어붙여 보며 "AI로 어디까지 가능한지"를 실험합니다.
-        아래는 그 실험들이 실제로 라이브로 돌고 있는 결과물입니다.
-      </p>
-      <div class="mt-8 flex flex-wrap gap-3 text-sm">
-        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">기획</span>
-        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">개발</span>
-        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">배포</span>
-        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">운영</span>
-        <span class="px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">전 과정 AI 활용</span>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="wrap">
+      <a class="brand" href="#top">이은재</a>
+      <div class="links">
+        <a href="#experiments">실험</a>
+        <a href="#contact">연락처</a>
       </div>
-    </header>
-
-    <!-- Section label -->
-    <div class="flex items-center gap-4 mb-8">
-      <h2 class="text-sm font-semibold tracking-widest text-neutral-500 uppercase">Live Experiments</h2>
-      <div class="flex-1 h-px bg-neutral-800"></div>
-      <span class="text-sm text-neutral-600">7</span>
     </div>
+  </nav>
 
-    <!-- Cards -->
-    <main class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 pb-24">
+  <div id="top"></div>
 
-      <!-- 낳을텐데 -->
-      <a href="https://love-ivf.com" target="_blank" rel="noopener"
-         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-start justify-between">
-          <div class="text-3xl">🧬</div>
-          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            LIVE
-          </span>
-        </div>
-        <h3 class="mt-4 text-xl font-bold">낳을텐데</h3>
-        <p class="text-sm text-neutral-500 mt-0.5">IVF 기록·관리 앱</p>
-        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
-          시험관(IVF)을 하는 모든 사람을 위한 기록·관리 앱. 멀티유저·구글 로그인·AI 채팅으로
-          복약, 일정, 회차를 한 곳에서 관리합니다.
-        </p>
-        <div class="mt-5 flex items-center justify-between text-sm">
-          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">love-ivf.com</span>
-          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </a>
-
-      <!-- 새가좋아 -->
-      <a href="https://like-birds.com" target="_blank" rel="noopener"
-         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-start justify-between">
-          <div class="text-3xl">🐦</div>
-          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            LIVE
-          </span>
-        </div>
-        <h3 class="mt-4 text-xl font-bold">새가좋아</h3>
-        <p class="text-sm text-neutral-500 mt-0.5">심플 탐조 앱</p>
-        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
-          사진 한 장으로 새를 식별하고, 한국 대표종 도감과 '내 도록(탐조 일지)'을 한 앱에서.
-        </p>
-        <div class="mt-5 flex items-center justify-between text-sm">
-          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">like-birds.com</span>
-          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </a>
-
-      <!-- 이은재서점 -->
-      <a href="https://book.lee-eunjae.com" target="_blank" rel="noopener"
-         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-start justify-between">
-          <div class="text-3xl">📚</div>
-          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            LIVE
-          </span>
-        </div>
-        <h3 class="mt-4 text-xl font-bold">이은재서점</h3>
-        <p class="text-sm text-neutral-500 mt-0.5">신간 큐레이션</p>
-        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
-          좋아하는 출판사·작가·독립서점의 신간을 매일 자동 수집해, 알라딘 이벤트 페이지 스타일
-          그리드 한 장으로 보는 개인 큐레이션 서비스.
-        </p>
-        <div class="mt-5 flex items-center justify-between text-sm">
-          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">book.lee-eunjae.com</span>
-          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </a>
-
-      <!-- 모닝브리프 -->
-      <a href="https://morning-brief-blush.vercel.app" target="_blank" rel="noopener"
-         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-start justify-between">
-          <div class="text-3xl">📈</div>
-          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            LIVE
-          </span>
-        </div>
-        <h3 class="mt-4 text-xl font-bold">모닝브리프</h3>
-        <p class="text-sm text-neutral-500 mt-0.5">AI 주식 브리핑</p>
-        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
-          매일 아침 7:30, 오늘 장에 들어갈지 말지를 점수와 안전장치(미국장·수급·실적)로
-          판단해주는 주식 데일리 대시보드.
-        </p>
-        <div class="mt-5 flex items-center justify-between text-sm">
-          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">morning-brief-blush.vercel.app</span>
-          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </a>
-
-      <!-- 누굴찍지 -->
-      <a href="https://nugulpick.com" target="_blank" rel="noopener"
-         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-start justify-between">
-          <div class="text-3xl">🗳️</div>
-          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            LIVE
-          </span>
-        </div>
-        <h3 class="mt-4 text-xl font-bold">누굴찍지</h3>
-        <p class="text-sm text-neutral-500 mt-0.5">선거 후보 비교 서비스</p>
-        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
-          중앙선관위 공개자료를 폭력·음주·비리·병역·다주택·세금 6항목으로 정리해,
-          유권자가 후보를 한눈에 비교할 수 있게 돕는 선거 정보 서비스.
-        </p>
-        <div class="mt-5 flex items-center justify-between text-sm">
-          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">nugulpick.com</span>
-          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </a>
-
-      <!-- 달려라 AI -->
-      <a href="https://www.run-ai-run.com" target="_blank" rel="noopener"
-         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-start justify-between">
-          <div class="text-3xl">🏃</div>
-          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            LIVE
-          </span>
-        </div>
-        <h3 class="mt-4 text-xl font-bold">달려라 AI</h3>
-        <p class="text-sm text-neutral-500 mt-0.5">AI 리포트 한국어 큐레이션</p>
-        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
-          매일 아침 McKinsey·BCG·Stanford 같은 글로벌 AI 리포트를 직접 읽고 한국어로 압축해
-          메일로 보내는 큐레이션 뉴스레터. 45개 발행처를 매일 모니터링합니다.
-        </p>
-        <div class="mt-5 flex items-center justify-between text-sm">
-          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">run-ai-run.com</span>
-          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </a>
-
-      <!-- 위드파킨슨 -->
-      <a href="https://withparkinson.com" target="_blank" rel="noopener"
-         class="card-glow group flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 transition-all duration-300 hover:-translate-y-1">
-        <div class="flex items-start justify-between">
-          <div class="text-3xl">🧠</div>
-          <span class="flex items-center gap-1.5 text-xs font-medium text-emerald-400">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-            </span>
-            LIVE
-          </span>
-        </div>
-        <h3 class="mt-4 text-xl font-bold">위드파킨슨</h3>
-        <p class="text-sm text-neutral-500 mt-0.5">파킨슨 환자·보호자 정보 허브</p>
-        <p class="mt-3 text-sm text-neutral-400 leading-relaxed flex-1">
-          파킨슨병 환자와 보호자가 가장 많이 묻는 질문에 쉬운 말과 근거로 답하고,
-          전 세계 최신 연구를 매주 한국어로 정리해 전하는 정보 허브.
-        </p>
-        <div class="mt-5 flex items-center justify-between text-sm">
-          <span class="text-neutral-500 group-hover:text-neutral-300 transition-colors">withparkinson.com</span>
-          <span class="text-neutral-600 group-hover:translate-x-0.5 transition-transform">→</span>
-        </div>
-      </a>
-
-    </main>
-
-    <!-- Contact -->
-    <section class="border-t border-neutral-900 pt-12 pb-4">
-      <div class="flex items-center gap-4 mb-6">
-        <h2 class="text-sm font-semibold tracking-widest text-neutral-500 uppercase">Contact</h2>
-        <div class="flex-1 h-px bg-neutral-800"></div>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">AI test-bed studio</p>
+      <h1>AI로 어디까지<br /><span class="metal">만들 수 있을까</span></h1>
+      <p class="sub">
+        AI를 도구로, 기획부터 개발·배포·운영까지 실제 서비스를 끝까지 밀어붙여 보며
+        "AI로 어디까지 가능한지"를 실험하는 1인 스튜디오.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#experiments">실험 보기 ›</a>
+        <a class="btn btn-ghost" href="#contact">연락하기</a>
       </div>
-      <div class="flex flex-wrap gap-4">
-        <a href="mailto:leeeunjae.house@gmail.com"
-           class="card-glow group inline-flex items-center gap-3 rounded-xl border border-neutral-800 bg-neutral-900/60 px-5 py-3 transition-all hover:-translate-y-0.5">
-          <span class="text-lg">✉️</span>
-          <span class="text-sm text-neutral-300 group-hover:text-white transition-colors">leeeunjae.house@gmail.com</span>
+    </div>
+  </header>
+
+  <!-- Experiments -->
+  <section class="sec" id="experiments">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>지금, 라이브로 돌아가는 실험들.</h2>
+        <p>7개의 서비스가 실제 사용자와 함께 돌고 있습니다.</p>
+      </div>
+
+      <div class="grid">
+
+        <a class="card reveal" href="https://love-ivf.com" target="_blank" rel="noopener">
+          <div class="top"><span class="emoji">🧬</span><span class="live"><span class="dot"></span>Live</span></div>
+          <h3>낳을텐데</h3>
+          <p class="cat">IVF 기록·관리 앱</p>
+          <p class="desc">시험관(IVF)을 하는 모든 사람을 위한 기록·관리 앱. 멀티유저·구글 로그인·AI 채팅으로 복약, 일정, 회차를 한 곳에서 관리합니다.</p>
+          <div class="foot"><span class="domain">love-ivf.com</span><span class="arrow">→</span></div>
         </a>
-        <a href="tel:+821096665354"
-           class="card-glow group inline-flex items-center gap-3 rounded-xl border border-neutral-800 bg-neutral-900/60 px-5 py-3 transition-all hover:-translate-y-0.5">
-          <span class="text-lg">📞</span>
-          <span class="text-sm text-neutral-300 group-hover:text-white transition-colors">010-9666-5354</span>
+
+        <a class="card reveal" href="https://like-birds.com" target="_blank" rel="noopener">
+          <div class="top"><span class="emoji">🐦</span><span class="live"><span class="dot"></span>Live</span></div>
+          <h3>새가좋아</h3>
+          <p class="cat">심플 탐조 앱</p>
+          <p class="desc">사진 한 장으로 새를 식별하고, 한국 대표종 도감과 '내 도록(탐조 일지)'을 한 앱에서.</p>
+          <div class="foot"><span class="domain">like-birds.com</span><span class="arrow">→</span></div>
         </a>
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-neutral-900 mt-12 py-10 text-sm text-neutral-600">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <p>© 2026 이은재 · AI 테스트베드 스튜디오</p>
-        <p>새로운 실험이 배포되면 이 페이지에 추가됩니다.</p>
-      </div>
-    </footer>
+        <a class="card reveal" href="https://book.lee-eunjae.com" target="_blank" rel="noopener">
+          <div class="top"><span class="emoji">📚</span><span class="live"><span class="dot"></span>Live</span></div>
+          <h3>이은재서점</h3>
+          <p class="cat">신간 큐레이션</p>
+          <p class="desc">좋아하는 출판사·작가·독립서점의 신간을 매일 자동 수집해, 알라딘 이벤트 페이지 스타일 그리드 한 장으로 보는 개인 큐레이션 서비스.</p>
+          <div class="foot"><span class="domain">book.lee-eunjae.com</span><span class="arrow">→</span></div>
+        </a>
 
-  </div>
+        <a class="card reveal" href="https://morning-brief-blush.vercel.app" target="_blank" rel="noopener">
+          <div class="top"><span class="emoji">📈</span><span class="live"><span class="dot"></span>Live</span></div>
+          <h3>모닝브리프</h3>
+          <p class="cat">AI 주식 브리핑</p>
+          <p class="desc">매일 아침 7:30, 오늘 장에 들어갈지 말지를 점수와 안전장치(미국장·수급·실적)로 판단해주는 주식 데일리 대시보드.</p>
+          <div class="foot"><span class="domain">morning-brief-blush.vercel.app</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card reveal" href="https://nugulpick.com" target="_blank" rel="noopener">
+          <div class="top"><span class="emoji">🗳️</span><span class="live"><span class="dot"></span>Live</span></div>
+          <h3>누굴찍지</h3>
+          <p class="cat">선거 후보 비교 서비스</p>
+          <p class="desc">중앙선관위 공개자료를 폭력·음주·비리·병역·다주택·세금 6항목으로 정리해, 유권자가 후보를 한눈에 비교할 수 있게 돕는 선거 정보 서비스.</p>
+          <div class="foot"><span class="domain">nugulpick.com</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card reveal" href="https://www.run-ai-run.com" target="_blank" rel="noopener">
+          <div class="top"><span class="emoji">🏃</span><span class="live"><span class="dot"></span>Live</span></div>
+          <h3>달려라 AI</h3>
+          <p class="cat">AI 리포트 한국어 큐레이션</p>
+          <p class="desc">매일 아침 McKinsey·BCG·Stanford 같은 글로벌 AI 리포트를 직접 읽고 한국어로 압축해 메일로 보내는 큐레이션 뉴스레터. 45개 발행처를 매일 모니터링합니다.</p>
+          <div class="foot"><span class="domain">run-ai-run.com</span><span class="arrow">→</span></div>
+        </a>
+
+        <a class="card reveal" href="https://withparkinson.com" target="_blank" rel="noopener">
+          <div class="top"><span class="emoji">🧠</span><span class="live"><span class="dot"></span>Live</span></div>
+          <h3>위드파킨슨</h3>
+          <p class="cat">파킨슨 환자·보호자 정보 허브</p>
+          <p class="desc">파킨슨병 환자와 보호자가 가장 많이 묻는 질문에 쉬운 말과 근거로 답하고, 전 세계 최신 연구를 매주 한국어로 정리해 전하는 정보 허브.</p>
+          <div class="foot"><span class="domain">withparkinson.com</span><span class="arrow">→</span></div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="wrap reveal">
+      <h2>같이 만들어 볼까요?</h2>
+      <div class="pills">
+        <a class="pill" href="mailto:leeeunjae.house@gmail.com">✉️&nbsp; leeeunjae.house@gmail.com</a>
+        <a class="pill" href="tel:+821096665354">📞&nbsp; 010-9666-5354</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 이은재 · AI 테스트베드 스튜디오 &nbsp;·&nbsp; 새로운 실험이 배포되면 이 페이지에 추가됩니다.
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (e, i) { e.style.transitionDelay = (Math.min(i, 6) * 60) + 'ms'; io.observe(e); });
+    })();
+  </script>
+
 </body>
 </html>
