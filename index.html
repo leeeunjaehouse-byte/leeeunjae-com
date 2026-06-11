@@ -47,7 +47,7 @@
     .nav .links a:hover { color: var(--text); }
 
     /* Hero */
-    .hero { text-align: center; padding: 120px 0 96px; }
+    .hero { text-align: center; padding: 110px 0 70px; }
     .eyebrow {
       font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--muted); font-weight: 600; margin: 0 0 22px;
@@ -74,6 +74,24 @@
     .btn-ghost { border: 1px solid var(--line); color: var(--text); }
     .btn-ghost:hover { border-color: #4a4a4d; background: rgba(255,255,255,0.04); }
 
+    /* Stats band */
+    .stats { padding: 26px 0 10px; }
+    .stats .row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      padding: 34px 0;
+    }
+    @media (max-width: 700px) { .stats .row { grid-template-columns: repeat(2, 1fr); row-gap: 30px; } }
+    .stat { text-align: center; }
+    .stat .num {
+      font-size: clamp(2rem, 4.6vw, 3rem); font-weight: 700; letter-spacing: -0.03em;
+      background: linear-gradient(180deg, #fbfbfd 8%, #c9c9ce 60%, #9a9aa0 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat .num small { font-size: 0.55em; font-weight: 600; }
+    .stat .label { margin-top: 6px; font-size: 13px; color: var(--muted); }
+
     /* Section heading */
     .sec { padding: 64px 0; }
     .sec-head { text-align: center; margin-bottom: 56px; }
@@ -89,13 +107,19 @@
     @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
     .card {
       display: flex; flex-direction: column; background: var(--surface);
-      border-radius: 28px; padding: 30px 28px; min-height: 280px;
+      border-radius: 28px; overflow: hidden;
       transition: transform .35s cubic-bezier(.2,.7,.2,1), background .35s;
       border: 1px solid rgba(255,255,255,0.04);
     }
     .card:hover { transform: translateY(-6px); background: #232325; }
-    .card .top { display: flex; align-items: flex-start; justify-content: space-between; }
-    .card .emoji { font-size: 34px; line-height: 1; }
+    .shot {
+      width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center top;
+      display: block; background: #0c0c0d; border-bottom: 1px solid rgba(255,255,255,0.06);
+      filter: saturate(1.02);
+    }
+    .card-body { display: flex; flex-direction: column; flex: 1; padding: 24px 26px 26px; }
+    .card .top { display: flex; align-items: center; justify-content: space-between; }
+    .card .emoji { font-size: 28px; line-height: 1; }
     .live {
       display: inline-flex; align-items: center; gap: 7px; font-size: 11px;
       font-weight: 600; letter-spacing: 0.08em; color: #30d158; text-transform: uppercase;
@@ -106,13 +130,48 @@
     }
     .dot::before { animation: ping 1.6s cubic-bezier(0,0,.2,1) infinite; }
     @keyframes ping { 75%,100% { transform: scale(2.4); opacity: 0; } }
-    .card h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin: 22px 0 2px; }
+    .card h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.02em; margin: 16px 0 2px; }
     .card .cat { font-size: 13px; color: var(--muted); margin: 0; }
-    .card .desc { font-size: 14.5px; line-height: 1.55; color: var(--muted); margin: 14px 0 0; flex: 1; }
-    .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; }
+    .card .desc { font-size: 14px; line-height: 1.55; color: var(--muted); margin: 12px 0 0; flex: 1; }
+    .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; }
     .card .domain { font-size: 13.5px; color: var(--blue); font-weight: 500; }
     .card .arrow { color: var(--blue); transition: transform .25s; }
     .card:hover .arrow { transform: translateX(3px); }
+
+    /* How I work */
+    .how { border-top: 1px solid var(--line); }
+    .how .lead {
+      text-align: center; max-width: 640px; margin: 0 auto 56px; color: var(--text);
+      font-size: clamp(1.2rem, 2.6vw, 1.6rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.4;
+    }
+    .how .lead span { color: var(--muted); font-weight: 400; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 700px) { .steps { grid-template-columns: 1fr; } }
+    .step {
+      background: var(--surface-2); border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 24px; padding: 28px 26px;
+    }
+    .step .no {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--blue);
+    }
+    .step h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 8px; }
+    .step p { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0; }
+
+    /* Now building */
+    .now { border-top: 1px solid var(--line); }
+    .feed { max-width: 720px; margin: 0 auto; }
+    .feed-item {
+      display: flex; align-items: baseline; gap: 16px; padding: 18px 6px;
+      border-bottom: 1px solid var(--line); font-size: 15px;
+    }
+    .feed-item:last-child { border-bottom: none; }
+    .feed-item .name { font-weight: 600; white-space: nowrap; }
+    .feed-item .what { color: var(--muted); flex: 1; line-height: 1.5; }
+    .feed-item .date { color: #6e6e73; font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    @media (max-width: 600px) {
+      .feed-item { flex-wrap: wrap; gap: 6px 12px; }
+      .feed-item .what { flex-basis: 100%; }
+    }
 
     /* Reveal */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
@@ -140,6 +199,8 @@
       <a class="brand" href="#top">이은재</a>
       <div class="links">
         <a href="#experiments">실험</a>
+        <a href="#how">방식</a>
+        <a href="#now">진행 중</a>
         <a href="#contact">연락처</a>
       </div>
     </div>
@@ -163,6 +224,30 @@
     </div>
   </header>
 
+  <!-- Stats -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="row reveal">
+        <div class="stat">
+          <div class="num"><span data-count="7">0</span></div>
+          <div class="label">라이브 서비스</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span data-count="49">0</span><small>일</small></div>
+          <div class="label">첫 실험부터 7개 배포까지</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span data-count="743">0</span><small>명</small></div>
+          <div class="label">검증한 선거 후보 데이터</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span data-count="45">0</span><small>곳</small></div>
+          <div class="label">매일 모니터링하는 AI 발행처</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Experiments -->
   <section class="sec" id="experiments">
     <div class="wrap">
@@ -174,61 +259,127 @@
       <div class="grid">
 
         <a class="card reveal" href="https://love-ivf.com" target="_blank" rel="noopener">
-          <div class="top"><span class="emoji">🧬</span><span class="live"><span class="dot"></span>Live</span></div>
-          <h3>낳을텐데</h3>
-          <p class="cat">IVF 기록·관리 앱</p>
-          <p class="desc">시험관(IVF)을 하는 모든 사람을 위한 기록·관리 앱. 멀티유저·구글 로그인·AI 채팅으로 복약, 일정, 회차를 한 곳에서 관리합니다.</p>
-          <div class="foot"><span class="domain">love-ivf.com</span><span class="arrow">→</span></div>
+          <img class="shot" src="assets/naheul.webp" alt="낳을텐데 스크린샷" loading="lazy" />
+          <div class="card-body">
+            <div class="top"><span class="emoji">🧬</span><span class="live"><span class="dot"></span>Live</span></div>
+            <h3>낳을텐데</h3>
+            <p class="cat">IVF 기록·관리 앱</p>
+            <p class="desc">시험관(IVF)을 하는 모든 사람을 위한 기록·관리 앱. 처방전·영수증 사진 한 장이면 AI가 약·비용·일정을 알아서 정리합니다.</p>
+            <div class="foot"><span class="domain">love-ivf.com</span><span class="arrow">→</span></div>
+          </div>
         </a>
 
         <a class="card reveal" href="https://like-birds.com" target="_blank" rel="noopener">
-          <div class="top"><span class="emoji">🐦</span><span class="live"><span class="dot"></span>Live</span></div>
-          <h3>새가좋아</h3>
-          <p class="cat">심플 탐조 앱</p>
-          <p class="desc">사진 한 장으로 새를 식별하고, 한국 대표종 도감과 '내 도록(탐조 일지)'을 한 앱에서.</p>
-          <div class="foot"><span class="domain">like-birds.com</span><span class="arrow">→</span></div>
+          <img class="shot" src="assets/saejoa.webp" alt="새가좋아 스크린샷" style="object-position: center 75%;" loading="lazy" />
+          <div class="card-body">
+            <div class="top"><span class="emoji">🐦</span><span class="live"><span class="dot"></span>Live</span></div>
+            <h3>새가좋아</h3>
+            <p class="cat">심플 탐조 앱</p>
+            <p class="desc">사진 한 장으로 새를 식별하고, 한국 대표종 도감과 '내 도록(탐조 일지)'을 한 앱에서.</p>
+            <div class="foot"><span class="domain">like-birds.com</span><span class="arrow">→</span></div>
+          </div>
         </a>
 
         <a class="card reveal" href="https://book.lee-eunjae.com" target="_blank" rel="noopener">
-          <div class="top"><span class="emoji">📚</span><span class="live"><span class="dot"></span>Live</span></div>
-          <h3>이은재서점</h3>
-          <p class="cat">신간 큐레이션</p>
-          <p class="desc">좋아하는 출판사·작가·독립서점의 신간을 매일 자동 수집해, 알라딘 이벤트 페이지 스타일 그리드 한 장으로 보는 개인 큐레이션 서비스.</p>
-          <div class="foot"><span class="domain">book.lee-eunjae.com</span><span class="arrow">→</span></div>
+          <img class="shot" src="assets/bookstore.webp" alt="이은재서점 스크린샷" loading="lazy" />
+          <div class="card-body">
+            <div class="top"><span class="emoji">📚</span><span class="live"><span class="dot"></span>Live</span></div>
+            <h3>이은재서점</h3>
+            <p class="cat">신간 큐레이션</p>
+            <p class="desc">좋아하는 출판사·작가·독립서점의 신간을 매일 자동 수집해, 그리드 한 장으로 보는 개인 큐레이션 서비스.</p>
+            <div class="foot"><span class="domain">book.lee-eunjae.com</span><span class="arrow">→</span></div>
+          </div>
         </a>
 
         <a class="card reveal" href="https://morning-brief-blush.vercel.app" target="_blank" rel="noopener">
-          <div class="top"><span class="emoji">📈</span><span class="live"><span class="dot"></span>Live</span></div>
-          <h3>모닝브리프</h3>
-          <p class="cat">AI 주식 브리핑</p>
-          <p class="desc">매일 아침 7:30, 오늘 장에 들어갈지 말지를 점수와 안전장치(미국장·수급·실적)로 판단해주는 주식 데일리 대시보드.</p>
-          <div class="foot"><span class="domain">morning-brief-blush.vercel.app</span><span class="arrow">→</span></div>
+          <img class="shot" src="assets/morningbrief.webp" alt="모닝브리프 스크린샷" loading="lazy" />
+          <div class="card-body">
+            <div class="top"><span class="emoji">📈</span><span class="live"><span class="dot"></span>Live</span></div>
+            <h3>모닝브리프</h3>
+            <p class="cat">AI 주식 브리핑</p>
+            <p class="desc">매일 아침 7:30, 오늘 장에 들어갈지 말지를 점수와 안전장치(미국장·수급·실적)로 판단해주는 주식 데일리 대시보드.</p>
+            <div class="foot"><span class="domain">morning-brief-blush.vercel.app</span><span class="arrow">→</span></div>
+          </div>
         </a>
 
         <a class="card reveal" href="https://nugulpick.com" target="_blank" rel="noopener">
-          <div class="top"><span class="emoji">🗳️</span><span class="live"><span class="dot"></span>Live</span></div>
-          <h3>누굴찍지</h3>
-          <p class="cat">선거 후보 비교 서비스</p>
-          <p class="desc">중앙선관위 공개자료를 폭력·음주·비리·병역·다주택·세금 6항목으로 정리해, 유권자가 후보를 한눈에 비교할 수 있게 돕는 선거 정보 서비스.</p>
-          <div class="foot"><span class="domain">nugulpick.com</span><span class="arrow">→</span></div>
+          <img class="shot" src="assets/nugulpick.webp" alt="누굴찍지 스크린샷" loading="lazy" />
+          <div class="card-body">
+            <div class="top"><span class="emoji">🗳️</span><span class="live"><span class="dot"></span>Live</span></div>
+            <h3>누굴찍지</h3>
+            <p class="cat">선거 후보 비교 서비스</p>
+            <p class="desc">중앙선관위 공개자료를 폭력·음주·비리·병역·다주택·세금 6항목으로 정리해, 유권자가 후보를 한눈에 비교할 수 있게 돕는 선거 정보 서비스.</p>
+            <div class="foot"><span class="domain">nugulpick.com</span><span class="arrow">→</span></div>
+          </div>
         </a>
 
         <a class="card reveal" href="https://www.run-ai-run.com" target="_blank" rel="noopener">
-          <div class="top"><span class="emoji">🏃</span><span class="live"><span class="dot"></span>Live</span></div>
-          <h3>달려라 AI</h3>
-          <p class="cat">AI 리포트 한국어 큐레이션</p>
-          <p class="desc">매일 아침 McKinsey·BCG·Stanford 같은 글로벌 AI 리포트를 직접 읽고 한국어로 압축해 메일로 보내는 큐레이션 뉴스레터. 45개 발행처를 매일 모니터링합니다.</p>
-          <div class="foot"><span class="domain">run-ai-run.com</span><span class="arrow">→</span></div>
+          <img class="shot" src="assets/runai.webp" alt="달려라 AI 스크린샷" loading="lazy" />
+          <div class="card-body">
+            <div class="top"><span class="emoji">🏃</span><span class="live"><span class="dot"></span>Live</span></div>
+            <h3>달려라 AI</h3>
+            <p class="cat">AI 리포트 한국어 큐레이션</p>
+            <p class="desc">매일 아침 McKinsey·BCG·Stanford 같은 글로벌 AI 리포트를 직접 읽고 한국어로 압축해 메일로 보내는 큐레이션 뉴스레터. 45개 발행처를 매일 모니터링합니다.</p>
+            <div class="foot"><span class="domain">run-ai-run.com</span><span class="arrow">→</span></div>
+          </div>
         </a>
 
         <a class="card reveal" href="https://withparkinson.com" target="_blank" rel="noopener">
-          <div class="top"><span class="emoji">🧠</span><span class="live"><span class="dot"></span>Live</span></div>
-          <h3>위드파킨슨</h3>
-          <p class="cat">파킨슨 환자·보호자 정보 허브</p>
-          <p class="desc">파킨슨병 환자와 보호자가 가장 많이 묻는 질문에 쉬운 말과 근거로 답하고, 전 세계 최신 연구를 매주 한국어로 정리해 전하는 정보 허브.</p>
-          <div class="foot"><span class="domain">withparkinson.com</span><span class="arrow">→</span></div>
+          <img class="shot" src="assets/withparkinson.webp" alt="위드파킨슨 스크린샷" loading="lazy" />
+          <div class="card-body">
+            <div class="top"><span class="emoji">🧠</span><span class="live"><span class="dot"></span>Live</span></div>
+            <h3>위드파킨슨</h3>
+            <p class="cat">파킨슨 환자·보호자 정보 허브</p>
+            <p class="desc">파킨슨병 환자와 보호자가 가장 많이 묻는 질문에 쉬운 말과 근거로 답하고, 전 세계 최신 연구를 매주 한국어로 정리해 전하는 정보 허브.</p>
+            <div class="foot"><span class="domain">withparkinson.com</span><span class="arrow">→</span></div>
+          </div>
         </a>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work -->
+  <section class="sec how" id="how">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>비개발자 한 명이,<br />어떻게 7개를 운영하나.</h2>
+      </div>
+      <p class="lead reveal">기획 · 디자인 · 개발 · 배포 · 운영 — 전부 혼자.<br /><span>단, AI와 함께. 그게 이 스튜디오의 실험입니다.</span></p>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="no">01 — 기획</div>
+          <h3>아이디어는 당일에 기획으로</h3>
+          <p>일상에서 발견한 문제를 그날 바로 AI와 검증하고 기획서로 만듭니다. 가족의 경험에서 출발한 서비스가 절반입니다.</p>
+        </div>
+        <div class="step reveal">
+          <div class="no">02 — 빌드</div>
+          <h3>AI 페어로 만들어 수일 내 배포</h3>
+          <p>코드는 AI가 쓰고, 판단은 사람이 합니다. MVP까지 며칠, 도메인 연결과 실배포까지 밀어붙여야 실험이 끝납니다.</p>
+        </div>
+        <div class="step reveal">
+          <div class="no">03 — 운영</div>
+          <h3>매일 기록하며 계속 디벨롭</h3>
+          <p>모든 작업은 매일 작업일지로 남깁니다. 배포가 끝이 아니라 시작 — 사용자 반응을 보며 매주 업데이트합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Now building -->
+  <section class="sec now" id="now">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>지금 만들고 있는 것.</h2>
+        <p>이 서비스들은 완결형이 아니라, 계속 디벨롭 중입니다.</p>
+      </div>
+      <div class="feed reveal">
+        <div class="feed-item"><span class="name">🧬 낳을텐데</span><span class="what">서류·이미지 통합 관리 페이지 작업 중</span><span class="date">2026.06.10</span></div>
+        <div class="feed-item"><span class="name">📚 이은재서점</span><span class="what">크롤 스케줄 재정비 + 신규 서점 추가</span><span class="date">2026.06.09</span></div>
+        <div class="feed-item"><span class="name">🧠 위드파킨슨</span><span class="what">신약 정보 상세화 + 모바일 화면 개선</span><span class="date">2026.06.08</span></div>
+        <div class="feed-item"><span class="name">🐦 새가좋아</span><span class="what">디자인 튜닝 + 전체 기능 검증·버그 수정</span><span class="date">2026.06.01</span></div>
+        <div class="feed-item"><span class="name">📈 모닝브리프</span><span class="what">매일 아침 7:30 자동 발행 운영 중</span><span class="date">매일</span></div>
+        <div class="feed-item"><span class="name">🏃 달려라 AI</span><span class="what">45개 발행처 모니터링 → 한국어 노트 발행 중</span><span class="date">매일</span></div>
       </div>
     </div>
   </section>
@@ -258,6 +409,30 @@
         });
       }, { threshold: 0.12 });
       els.forEach(function (e, i) { e.style.transitionDelay = (Math.min(i, 6) * 60) + 'ms'; io.observe(e); });
+
+      // Count-up for stats
+      var counted = false;
+      function countUp() {
+        if (counted) return; counted = true;
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var dur = 1200, start = null;
+          function tick(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+      }
+      var statsRow = document.querySelector('.stats .row');
+      if (statsRow && 'IntersectionObserver' in window) {
+        var io2 = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { countUp(); io2.disconnect(); } });
+        }, { threshold: 0.4 });
+        io2.observe(statsRow);
+      } else { countUp(); }
     })();
   </script>
 
